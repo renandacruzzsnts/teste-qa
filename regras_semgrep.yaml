@@ -1,0 +1,26 @@
+rules:
+  - id: python-problematic-code
+    patterns:
+      - pattern: print(...)
+      - pattern: |
+          if $X > 18
+      - pattern: |
+          if $B == 0:
+              ...
+      - pattern: |
+          def $FUNC(...):
+              ...
+      - pattern: |
+          for $VAR in range(...):
+              ...
+    message: |
+      🚩 Problemas detectados:
+      - Uso de 'print' em produção (use 'logging').
+      - Comparação incorreta entre string e inteiro.
+      - Verificação 'if B == 0' pode causar divisão por zero.
+      - Função possivelmente não utilizada.
+      - Verifique loops: pode haver problema de índice fora do range.
+
+      ⚠️ Corrija para melhorar a qualidade e segurança do código.
+    languages: [python]
+    severity: WARNING
